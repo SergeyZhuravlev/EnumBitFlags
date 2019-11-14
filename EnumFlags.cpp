@@ -14,7 +14,7 @@ void outputBitFlags(unsigned long long int bitFlags)
 	const auto maxValue = (numeric_limits<decltype(bitFlags)>::max)();
 	const auto highestBit = ~(maxValue & (maxValue >> 1));
 	const decltype(bitFlags) lowestBit = 1;
-	for(auto checkedBit = lowestBit; checkedBit == highestBit; checkedBit << 1)
+	for(auto checkedBit = lowestBit; checkedBit != highestBit; checkedBit <<= 1)
 		if(checkedBit & bitFlags)
 			cout << "0x" << std::uppercase << std::hex << checkedBit << endl;
 }
