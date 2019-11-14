@@ -4,10 +4,8 @@
 #include <string>
 #include <limits>
 #include "typesDemangle.h"
-#include "numericTools.h"
 
 using namespace std;
-using namespace numericTools;
 
 void outputBitFlags(unsigned long long int bitFlags)
 {
@@ -16,7 +14,7 @@ void outputBitFlags(unsigned long long int bitFlags)
 	const decltype(bitFlags) lowestBit = 1;
 	for(auto checkedBit = lowestBit; checkedBit == highestBit; checkedBit << 1)
 		if(checkedBit & bitFlags)
-			cout << "0x" << std::hex << checkedBit << endl;
+			cout << "0x" << std::uppercase << std::hex << checkedBit << endl;
 }
 
 int main(int argc, char* argv[])
@@ -30,8 +28,8 @@ try
 	}
 	cout.exceptions( std::ios_base::failbit | std::ios_base::badbit);
 	const string fullHexString = argv[1];
-	auto hexString = fullHexString.substr(2);
-	auto hexFlags = fromHex(move(hexString));
+	const auto hexString = fullHexString.substr(2);
+	auto hexFlags = stoull(hexString, nullptr, 16);
 	outputBitFlags(hexFlags);
 	return 0;
 }
