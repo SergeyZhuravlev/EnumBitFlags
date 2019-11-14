@@ -3,6 +3,8 @@
 #include <typeinfo>
 #include <string>
 #include <limits>
+#include <algorithm>
+#include <functional>
 #include "typesDemangle.h"
 
 using namespace std;
@@ -20,15 +22,26 @@ void outputBitFlags(unsigned long long int bitFlags)
 int main(int argc, char* argv[])
 try
 {
-	if(argc != 2 || string(argv[1]).length() < 3 || string(argv[1]).substr(0, 2) != "0x")
+	const auto outputError = []
 	{
 		cout << "This command decomposing enum bit flags from numeric value" << endl;
 		cerr << "Invalid arguments. First argument should be enum flag number in hex, 0x56fd e.g." << endl;
 		return -1;
-	}
+	};
+	
+	if(argc != 2)
+		return outputError();
+	const string firstArg = argv[1];
+	if(firstArg.length() < 3 || firstArg.substr(0, 2) != "0x")
+		 return outputError();
 	cout.exceptions( std::ios_base::failbit | std::ios_base::badbit);
-	const string fullHexString = argv[1];
-	const auto hexString = fullHexString.substr(2);
+	const auto hexString = firstArg.substr(2);
+	if(any_of(hexString.cbegin(), hexString.cend(), [](const auto v)
+	{
+		const auto V = toupper(v);
+		return !(std::isdigit(v) || V == 'A' || V == 'B' || V == 'C' || V == 'D' || V == 'E' || V == 'F');
+	}))
+		 return outputError();
 	auto hexFlags = stoull(hexString, nullptr, 16);
 	outputBitFlags(hexFlags);
 	return 0;
