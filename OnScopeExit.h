@@ -1,6 +1,7 @@
 #pragma once
 #include <functional>
-#include <utils>
+#include <utility>
+
 namespace exceptionsSupport
 {
 	class OnScopeExit
@@ -13,9 +14,9 @@ namespace exceptionsSupport
 		OnScopeExit(T&& handler)
 		: _handler(std::forward<T>(handler))
 		{}
-		~OnScopeExit() noexpect(false)
+		~OnScopeExit() noexcept(false)
 		{
-			bool afterException = std::uncought_exception();
+			bool afterException = std::uncaught_exception();
 			try
 			{
 				if(_handler)
@@ -29,5 +30,5 @@ namespace exceptionsSupport
 		
 	private:
 		std::function<void()> _handler;
-	}
+	};
 }

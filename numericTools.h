@@ -2,6 +2,7 @@
 #include <string>
 #include <sstream>
 #include <iomanip>
+#include <utility>
 
 namespace numericTools
 {
@@ -20,7 +21,9 @@ namespace numericTools
 	unsigned long long int fromHex(std::string hexString)
 	{
 		std::stringstream s;
-		s << std::hex << std::move(value);
-		return std::move(s.str());
+		s << std::hex << std::move(hexString);
+		unsigned long long result {};
+		result >> result;
+		return result;
 	}
 }

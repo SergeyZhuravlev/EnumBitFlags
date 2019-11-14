@@ -4,15 +4,17 @@
 	#include <cxxabi.h>
 	#include "OnScopeExit.h"
 #endif
+
 namespace typesSupport
 {
 	#ifndef _MSC_VER
 		std::string demangle(const char* const typeName)
 		{
+			using namespace exceptionsSupport;
 			std::string result;
 			int status = -1;
-			const char* demangled = abi::__cxa_demangle(ti.name(), 0, 0, &status);
-			OnScopeExit call = [demangled]{ free(demangled); };
+			char* const demangled = abi::__cxa_demangle(typeName, 0, 0, &status);
+			OnScopeExit call {[demangled]{ free(demangled); }};
 			if(status)
 				result = typeName;
 			else
