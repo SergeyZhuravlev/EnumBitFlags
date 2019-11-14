@@ -24,7 +24,7 @@ try
 {
 	if(argc != 2 || string(argv[1]).length() < 3 || string(argv[1]).substr(0, 2) != "0x")
 	{
-		cout << "This command decomposing enum bit flags from numeric value";
+		cout << "This command decomposing enum bit flags from numeric value" << endl;
 		cerr << "Invalid arguments. First argument should be enum flag number in hex, 0x56fd e.g." << endl;
 		return -1;
 	}
