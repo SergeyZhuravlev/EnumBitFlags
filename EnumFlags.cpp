@@ -28,6 +28,7 @@ try
 		cerr << "Invalid arguments. First argument should be enum flag number in hex, 0x56fd e.g." << endl;
 		return -1;
 	}
+	cout.exceptions( std::ios_base::failbit | std::ios_base::badbit);
 	const string fullHexString = argv[1];
 	auto hexString = fullHexString.substr(2);
 	auto hexFlags = fromHex(move(hexString));
