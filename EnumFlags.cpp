@@ -26,7 +26,7 @@ try
 	const auto outputError = []
 	{
 		cout << "This command decomposing enum bit flags from numeric value" << endl;
-		cerr << "Invalid arguments. First argument should be enum flag number in hex, 0x56fd e.g." << endl;
+		cerr << "\033[31;29mInvalid arguments. First argument should be enum flag number in hex, 0x56fd e.g." << endl;
 		return -1;
 	};
 	
@@ -49,11 +49,11 @@ try
 }
 catch(exception& ex)
 {
-	cerr << "Exception " << typesSupport::demangle(typeid(ex).name()) << ": " << ex.what() << endl;
+	cerr << "\033[31;29mException " << typesSupport::demangle(typeid(ex).name()) << ": " << ex.what() << endl;
 	return -1;
 }
 catch(...)
 {
-	cerr << "Unexpected exception" << endl;
+	cerr << "\033[31;29mUnexpected exception" << endl;
 	return -1;
 }
