@@ -29,7 +29,7 @@ try
 		cerr << "Invalid arguments. First argument should be enum flag number in hex, 0x5F6D e.g." << endl;
 		cout << endl;
 		cout << "Using example:" << endl;
-		cout << "enumflags 0x15c" << endl;
+		cout << "$ enumflags 0x15c" << endl;		
 		cout << "0x4" << endl;
 		cout << "0x8" << endl;
 		cout << "0x10" << endl;
