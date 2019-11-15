@@ -5,6 +5,7 @@
 #include <limits>
 #include <algorithm>
 #include <functional>
+#include <cctype>
 #include "typesDemangle.h"
 
 using namespace std;
